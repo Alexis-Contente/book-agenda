@@ -1,25 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 // TYPE CONTACT
-type Contact = {
+type Contacts = {
   id: string;
   firstname: string;
   lastname: string;
   email: string;
   birth: number;
-  informations: string;
+  information: string;
 };
 
-export default function Home(contact: Contact) {
-  console.log(contact);
-
+export default function Home() {
   // TOGGLE MODAL
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal(!showModal);
   };
+
+  // FUNCTION THAT GET INFORMATIONS OF CONTACTS FOR DISPLAY
+  const [contacts, setContacts] = useState<Contacts[] | null>(null);
+
+  // REQUEST TO GET DATA CONTACT
+  const contactsData = async () => {
+    axios
+      .get("/api/contact")
+      .then((response) => {
+        setContacts(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    contactsData();
+  }, []);
 
   return (
     <main className="min-h-screen">
@@ -46,21 +65,30 @@ export default function Home(contact: Contact) {
       </nav>
 
       {/* CARDS */}
-      <div className="w-1/2 mx-auto block rounded-lg bg-white p-6 flex flex-row mb-4">
-        <div className="w-1/2">
-          <p className="my-2 text-base uppercase">NAME FIRSTNAME</p>
-          <p className="my-2 text-base">EMAIL</p>
-          <p className="my-2 text-base">DATE OF BIRTH</p>
-        </div>
-        <div className="w-1/2 flex flex-col items-end justify-center	gap-1">
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-36">
-            MODIFY
-          </button>
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-36">
-            DELETE
-          </button>
-        </div>
-      </div>
+      {contacts &&
+        contacts.map((contact) => (
+          <div
+            key={contact.id}
+            className="w-1/2 mx-auto block rounded-lg bg-white p-6 flex flex-row mb-4"
+          >
+            <div className="w-1/2">
+              <p className="my-2 text-base uppercase">
+                {contact.firstname} {contact.lastname}
+              </p>
+              <p className="my-2 text-base">{contact.email}</p>
+              <p className="my-2 text-base">{contact.birth}</p>
+              <p className="my-2 text-base">{contact.information}</p>
+            </div>
+            <div className="w-1/2 flex flex-col items-end justify-center	gap-1">
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-36">
+                MODIFY
+              </button>
+              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-36">
+                DELETE
+              </button>
+            </div>
+          </div>
+        ))}
 
       {/* MODAL FORM */}
 
@@ -68,7 +96,6 @@ export default function Home(contact: Contact) {
       {showModal && (
         <div
           id="authentication-modal"
-          tabindex="-1"
           aria-hidden="true"
           className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex items-center justify-center"
         >
