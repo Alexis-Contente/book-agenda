@@ -2,14 +2,15 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRef } from "react";
 
-// TYPE CONTACT
+// TYPE CONTACTS
 type Contacts = {
   id: string;
   firstname: string;
   lastname: string;
   email: string;
-  birth: number;
+  birth: string;
   information: string;
 };
 
@@ -21,7 +22,7 @@ export default function Home() {
   };
 
   // FUNCTION THAT GET INFORMATIONS OF CONTACTS FOR DISPLAY
-  const [contacts, setContacts] = useState<Contacts[] | null>(null);
+  const [contacts, setContacts] = useState<Contacts[]>([]);
 
   // REQUEST TO GET DATA CONTACT
   const contactsData = async () => {
@@ -39,6 +40,39 @@ export default function Home() {
   useEffect(() => {
     contactsData();
   }, []);
+
+  // HANDLE THAT SAVE INFORMATIONS OF A NEW CONTACT
+  const formRef: any = useRef(null);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const data = new FormData(formRef.current);
+
+    const firstname = data.get("firstname");
+    const lastname = data.get("lastname");
+    const email = data.get("email");
+    const birth = data.get("birth");
+    const information = data.get("information");
+    // console.log(firstname, lastname, email, birth, informations);
+
+    axios
+      .post("/api/contacts", {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        birth: birth,
+        information: information,
+      })
+      .then((response) => {
+        window.location.reload();
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <main className="min-h-screen">
@@ -126,10 +160,10 @@ export default function Home() {
                 <span className="sr-only">Close modal</span>
               </button>
               <div className="px-6 py-6 lg:px-8">
-                <form className="space-y-6" action="#">
+                <form className="space-y-6" action="#" onSubmit={handleSubmit}>
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Name
@@ -145,7 +179,7 @@ export default function Home() {
                   </div>
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Firstname
@@ -161,7 +195,7 @@ export default function Home() {
                   </div>
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Email
@@ -177,13 +211,13 @@ export default function Home() {
                   </div>
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Date of birth
                     </label>
                     <input
-                      type="date"
+                      type="text"
                       name="birth"
                       id="birth"
                       className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark"

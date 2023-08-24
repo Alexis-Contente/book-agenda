@@ -2,6 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { PrismaClient } from "@prisma/client";
 
+type Contact = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  birth: string;
+  information: string;
+}
+
 const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
@@ -15,3 +23,23 @@ export async function GET(request: NextRequest) {
   }
 }
 
+export async function POST(request: NextRequest) {
+  try {
+    const requestBody = await request.json();
+    const { firstname, lastname, email, birth, information }: Contact = requestBody;
+    
+    if (!firstname || !lastname || !email || !birth || !information) {
+      return NextResponse.json({ error: 'Tous les champs sont requis.' }, { status: 400 });
+    }
+
+    const result = await prisma.contact.create({
+      data: { firstname, lastname, email, birth, information },
+    });
+
+    console.log(result);
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.error();
+  }
+}
