@@ -30,7 +30,7 @@ export default function Home() {
       .get("/api/contact")
       .then((response) => {
         setContacts(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -54,10 +54,10 @@ export default function Home() {
     const email = data.get("email");
     const birth = data.get("birth");
     const information = data.get("information");
-    // console.log(firstname, lastname, email, birth, informations);
+    console.log(firstname, lastname, email, birth, information);
 
     axios
-      .post("/api/contacts", {
+      .post("/api/contact", {
         firstname: firstname,
         lastname: lastname,
         email: email,
@@ -66,12 +66,26 @@ export default function Home() {
       })
       .then((response) => {
         window.location.reload();
-        console.log(response);
+        // console.log(response);
+        console.log("Données envoyées à l'API");
         return response;
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Erreur lors de l'envoi des données vers l'API", error);
       });
+  };
+
+  // HANDLE THAT DELETE A CONTACT
+  const handleDelete = (e: any) => {
+    e.preventDefault();
+    try {
+      if (contacts) {
+        axios.delete(`/api/contact/${e.target.id}`);
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Impossible de supprimer le contact", error);
+    }
   };
 
   return (
@@ -117,7 +131,10 @@ export default function Home() {
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-36">
                 MODIFY
               </button>
-              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-36">
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-36"
+                onClick={handleDelete}
+              >
                 DELETE
               </button>
             </div>
@@ -151,35 +168,40 @@ export default function Home() {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                   />
                 </svg>
                 <span className="sr-only">Close modal</span>
               </button>
               <div className="px-6 py-6 lg:px-8">
-                <form className="space-y-6" action="#" onSubmit={handleSubmit}>
+                <form
+                  className="space-y-6"
+                  action="#"
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                >
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="lastname"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Name
+                      Lastname
                     </label>
                     <input
                       type="text"
-                      name="Name"
-                      id="Name"
+                      name="lastname"
+                      id="lastname"
                       className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark"
-                      placeholder="Enter name"
+                      placeholder="Enter lastname"
                       required
                     ></input>
                   </div>
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="firstname"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Firstname
@@ -224,6 +246,19 @@ export default function Home() {
                       placeholder="Enter date of birth"
                       required
                     ></input>
+                    <label
+                      htmlFor="email"
+                      className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Information
+                    </label>
+                    <textarea
+                      name="information"
+                      id="information"
+                      className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark"
+                      placeholder="Other informations"
+                      required
+                    ></textarea>
                   </div>
 
                   <button

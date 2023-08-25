@@ -18,7 +18,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     console.log(error);
     return NextResponse.error();
   }
-
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
