@@ -20,7 +20,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: { id: number } }) {
   try {
     const {id} = params;
     const result = await prisma.contact.delete({
@@ -34,5 +34,4 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     console.log(error);
     return NextResponse.error();
   }
-
 }
