@@ -136,6 +136,22 @@ export default function Home() {
     }
   };
 
+  // GESTION SEARCHBAR
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const results = contacts.filter((contact) =>
+      contact.firstname.toLowerCase().includes(searchTerm)
+    );
+  }, []);
+
+  const handleSearchTerm = (e: any) => {
+    // console.log(e.target.value);
+    const value = e.target.value;
+    setSearchTerm(value);
+  };
+  console.log(searchTerm);
   return (
     <main className="min-h-screen">
       <h1 className="pt-12 text-center text-4xl font-bold uppercase ">
@@ -148,6 +164,7 @@ export default function Home() {
           type="text"
           placeholder="Search contact"
           className="border-2 rounded py-2 px-4 grow"
+          onChange={handleSearchTerm}
         />
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center">
           <Image alt="Image d'un icône de recherche" src={searchIcon}></Image>
@@ -164,40 +181,56 @@ export default function Home() {
 
       {/* CARDS */}
       {contacts &&
-        contacts.map((contact) => (
-          <div
-            key={contact.id}
-            className="w-1/2 mx-auto block rounded-lg bg-white p-6 flex flex-row mb-4"
-          >
-            <div className="w-1/2">
-              <p className="my-2 text-base uppercase">
-                {contact.firstname} {contact.lastname}
-              </p>
-              <p className="my-2 text-base">{contact.email}</p>
-              <p className="my-2 text-base">{contact.birth}</p>
-              <p className="my-2 text-base">{contact.information}</p>
-            </div>
-            <div className="w-1/2 flex flex-col items-end justify-center	gap-1">
-              <button
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center"
-                onClick={() => handleEdit(contact)}
+        contacts
+          .filter((contact) => {
+            return contact.firstname.toLowerCase().includes(searchTerm);
+          })
+          .map(
+            (contact: {
+              id: any;
+              firstname: any;
+              lastname: any;
+              email: any;
+              birth: any;
+              information: any;
+            }) => (
+              <div
+                key={contact.id}
+                className="w-1/2 mx-auto block rounded-lg bg-white p-6 flex flex-row mb-4"
               >
-                <Image alt="Image d'un icône d'edition" src={editIcon}></Image>
-                <p className="uppercase">Edit</p>
-              </button>
-              <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center"
-                onClick={() => handleDelete(contact.id)}
-              >
-                <Image
-                  alt="Image d'un icône de suppression"
-                  src={deleteIcon}
-                ></Image>
-                <p className="uppercase">Delete</p>
-              </button>
-            </div>
-          </div>
-        ))}
+                <div className="w-1/2">
+                  <p className="my-2 text-base uppercase">
+                    {contact.firstname} {contact.lastname}
+                  </p>
+                  <p className="my-2 text-base">{contact.email}</p>
+                  <p className="my-2 text-base">{contact.birth}</p>
+                  <p className="my-2 text-base">{contact.information}</p>
+                </div>
+                <div className="w-1/2 flex flex-col items-end justify-center	gap-1">
+                  <button
+                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center"
+                    onClick={() => handleEdit(contact)}
+                  >
+                    <Image
+                      alt="Image d'un icône d'edition"
+                      src={editIcon}
+                    ></Image>
+                    <p className="uppercase">Edit</p>
+                  </button>
+                  <button
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center"
+                    onClick={() => handleDelete(contact.id)}
+                  >
+                    <Image
+                      alt="Image d'un icône de suppression"
+                      src={deleteIcon}
+                    ></Image>
+                    <p className="uppercase">Delete</p>
+                  </button>
+                </div>
+              </div>
+            )
+          )}
 
       {/* MODAL FORM */}
 
