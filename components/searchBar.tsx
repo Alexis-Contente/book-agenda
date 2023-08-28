@@ -8,7 +8,7 @@ type Props = {
 
 export default function SearchBar(props: Props) {
   return (
-    <nav className="w-1/2 mx-auto mt-12 mb-12 space-x-2 flex">
+    <nav className="w-1/2 mx-auto mt-4 mb-12 space-x-2 flex">
       <input
         type="text"
         placeholder="Search contact"

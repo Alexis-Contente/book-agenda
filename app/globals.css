@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply h-full m-0 p-0;
+}
+
 main {
-  @apply bg-gray-100;
+  @apply bg-gray-100 flex flex-col h-full;
 }

@@ -3,13 +3,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
+import Header from "@/components/header";
 import SearchBar from "@/components/searchBar";
 import CardContact from "@/components/cardContact";
 import AddForm from "@/components/addForm";
 import EditForm from "@/components/editForm";
+import Footer from "@/components/footer";
 
 // TYPE CONTACTS
-type Contacts = {
+type Contact = {
   id: number;
   firstname: string;
   lastname: string;
@@ -32,13 +34,13 @@ export default function Home() {
   };
 
   // FUNCTION THAT GET INFORMATIONS OF CONTACTS FOR DISPLAY
-  const [contacts, setContacts] = useState<Contacts[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
 
   // FUNCTION THAT GET INFORMATIONS OF CONTACTS FOR EDIT
-  const [selectedContact, setSelectedContact] = useState<Contacts | null>(null);
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
   // TOGGLE EDIT MODAL
-  const handleEdit = (contact: Contacts) => {
+  const handleEdit = (contact: Contact) => {
     setSelectedContact(contact);
     setShowModalEdit(true);
   };
@@ -154,10 +156,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      <h1 className="pt-12 text-center text-4xl font-bold uppercase ">
-        Book agenda
-      </h1>
-
+      <Header></Header>
       {/* SEARCHBAR */}
       <SearchBar openModal={openModal} onChange={handleSearchTerm}></SearchBar>
 
@@ -171,7 +170,7 @@ export default function Home() {
               contact.email.toLowerCase().includes(searchTerm)
             );
           })
-          .map((contact: Contacts) => (
+          .map((contact: Contact) => (
             <CardContact
               key={contact.id}
               handleEdit={() => {
@@ -211,6 +210,7 @@ export default function Home() {
           handleSubmitEdit={handleSubmitEdit}
         ></EditForm>
       )}
+      <Footer></Footer>
     </main>
   );
 }
