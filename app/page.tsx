@@ -183,16 +183,19 @@ export default function Home() {
       {contacts &&
         contacts
           .filter((contact) => {
-            return contact.firstname.toLowerCase().includes(searchTerm);
+            return (
+              contact.firstname.toLowerCase().includes(searchTerm) ||
+              contact.lastname.toLowerCase().includes(searchTerm)
+            );
           })
           .map(
             (contact: {
-              id: any;
-              firstname: any;
-              lastname: any;
-              email: any;
-              birth: any;
-              information: any;
+              id: string;
+              firstname: string;
+              lastname: string;
+              email: string;
+              birth: string;
+              information: string;
             }) => (
               <div
                 key={contact.id}
