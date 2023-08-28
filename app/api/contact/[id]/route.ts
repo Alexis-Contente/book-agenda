@@ -21,8 +21,10 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: number } }) {
+  console.log("dpassla");
   try {
     const {id} = params;
+    console.log("api", id);
     const result = await prisma.contact.delete({
         where: {
             id: Number(id),

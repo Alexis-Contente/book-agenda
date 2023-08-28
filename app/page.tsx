@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import editIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-modifier-30.png";
 import deleteIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-close-cross-30.png";
+import searchIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-search-30.png";
+import addIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-add-30.png";
 
 // TYPE CONTACTS
 type Contacts = {
@@ -79,16 +81,17 @@ export default function Home() {
   };
 
   // HANDLE THAT DELETE A CONTACT
-  const handleDelete = async (e: any) => {
-    e.preventDefault();
+  const handleDelete = async (id: string) => {
     try {
       if (contacts) {
-        const contactId = e.target.id;
-        axios.delete(`/api/contact/${contactId}`);
+        console.log(id);
+        await axios.delete(`/api/contact/${id}`);
         console.log("Contact supprimé");
       }
     } catch (error) {
       console.error("Impossible de supprimer le contact", error);
+    } finally {
+      window.location.reload();
     }
   };
 
@@ -105,14 +108,16 @@ export default function Home() {
           placeholder="Search contact"
           className="border-2 rounded py-2 px-4 grow"
         />
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-36">
-          Search
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center">
+          <Image alt="Image d'un icône de recherche" src={searchIcon}></Image>
+          <p className="uppercase">Search</p>
         </button>
         <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-36"
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center"
           onClick={openModal}
         >
-          Add
+          <Image alt="Image d'un icône d'ajout" src={addIcon}></Image>
+          <p className="uppercase">Add</p>
         </button>
       </nav>
 
@@ -134,11 +139,11 @@ export default function Home() {
             <div className="w-1/2 flex flex-col items-end justify-center	gap-1">
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center">
                 <Image alt="Image d'un icône d'edition" src={editIcon}></Image>
-                <p className="uppercase">Modify</p>
+                <p className="uppercase">Edit</p>
               </button>
               <button
                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-36 flex justify-between items-center"
-                onClick={handleDelete}
+                onClick={() => handleDelete(contact.id)}
               >
                 <Image
                   alt="Image d'un icône de suppression"
