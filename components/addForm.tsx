@@ -46,22 +46,6 @@ export default function AddForm(props: Props) {
             >
               <div>
                 <label
-                  htmlFor="lastname"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Lastname
-                </label>
-                <input
-                  type="text"
-                  name="lastname"
-                  id="lastname"
-                  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark"
-                  placeholder="Enter lastname"
-                  required
-                ></input>
-              </div>
-              <div>
-                <label
                   htmlFor="firstname"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
@@ -73,6 +57,22 @@ export default function AddForm(props: Props) {
                   id="firstname"
                   className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark"
                   placeholder="Enter firstname"
+                  required
+                ></input>
+              </div>
+              <div>
+                <label
+                  htmlFor="lastname"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Lastname
+                </label>
+                <input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-500 dark:placeholder-gray-400 dark:text-dark"
+                  placeholder="Enter lastname"
                   required
                 ></input>
               </div>

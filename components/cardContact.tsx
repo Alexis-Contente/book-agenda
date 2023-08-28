@@ -1,6 +1,10 @@
 import Image from "next/image";
 import editIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-modifier-30.png";
 import deleteIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-close-cross-30.png";
+import userIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-person-24.png";
+import emailIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-email-24.png";
+import birthIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-birthday-24.png";
+import informationIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-information-25.png";
 
 type Contact = {
   id: number;
@@ -21,12 +25,40 @@ export default function CardContact(props: Props) {
   return (
     <div className="w-1/2 mx-auto block rounded-lg bg-white p-6 flex flex-row mb-4">
       <div className="w-1/2">
-        <p className="my-2 text-base uppercase">
-          {props.contact.firstname} {props.contact.lastname}
-        </p>
-        <p className="my-2 text-base">{props.contact.email}</p>
-        <p className="my-2 text-base">{props.contact.birth}</p>
-        <p className="my-2 text-base">{props.contact.information}</p>
+        <div className="flex gap-2 items-center">
+          <Image
+            alt="Image d'un icône de profil"
+            src={userIcon}
+            className="w-4 h-4"
+          ></Image>
+          <p className="my-2 text-base uppercase">
+            {props.contact.firstname} {props.contact.lastname}
+          </p>
+        </div>
+        <div className="flex gap-2 items-center">
+          <Image
+            alt="Image d'un icône email"
+            src={emailIcon}
+            className="w-4 h-4"
+          ></Image>
+          <p className="my-2 text-base">{props.contact.email}</p>
+        </div>
+        <div className="flex gap-2 items-center">
+          <Image
+            alt="Image d'un icône de gâteau d'anniversaire"
+            src={birthIcon}
+            className="w-4 h-4"
+          ></Image>
+          <p className="my-2 text-base">{props.contact.birth}</p>
+        </div>
+        <div className="flex gap-2 items-center">
+          <Image
+            alt="Image d'un icône d'information"
+            src={informationIcon}
+            className="w-4 h-4"
+          ></Image>
+          <p className="my-2 text-base">{props.contact.information}</p>
+        </div>
       </div>
       <div className="w-1/2 flex flex-col items-end justify-center	gap-1">
         <button
