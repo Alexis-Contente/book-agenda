@@ -33,17 +33,17 @@ export default function Home() {
     setShowModalEdit(!showModalEdit);
   };
 
-  // FUNCTION THAT GET INFORMATIONS OF CONTACTS FOR DISPLAY
-  const [contacts, setContacts] = useState<Contact[]>([]);
-
-  // FUNCTION THAT GET INFORMATIONS OF CONTACTS FOR EDIT
-  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
-
   // TOGGLE EDIT MODAL
   const handleEdit = (contact: Contact) => {
     setSelectedContact(contact);
     setShowModalEdit(true);
   };
+
+  // FUNCTION THAT GET INFORMATIONS OF CONTACTS FOR DISPLAY
+  const [contacts, setContacts] = useState<Contact[]>([]);
+
+  // FUNCTION THAT GET INFORMATIONS OF CONTACTS FOR EDIT
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
   // REQUEST TO GET DATA CONTACT
   const contactsData = async () => {
@@ -148,15 +148,15 @@ export default function Home() {
   }, []);
 
   const handleSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.value);
     const value = e.target.value;
     setSearchTerm(value);
   };
-  console.log(searchTerm);
 
   return (
     <main className="min-h-screen">
+      {/* HEARDER */}
       <Header></Header>
+
       {/* SEARCHBAR */}
       <SearchBar openModal={openModal} onChange={handleSearchTerm}></SearchBar>
 
@@ -184,8 +184,6 @@ export default function Home() {
           ))}
 
       {/* MODAL FORM */}
-
-      {/* <!-- Main modal --> */}
       {showModal && (
         <AddForm
           openModal={openModal}
@@ -195,8 +193,6 @@ export default function Home() {
       )}
 
       {/* MODAL EDITFORM */}
-
-      {/* <!-- Main modal --> */}
       {showModalEdit && selectedContact && (
         <EditForm
           openModalEdit={openModalEdit}
@@ -210,6 +206,8 @@ export default function Home() {
           handleSubmitEdit={handleSubmitEdit}
         ></EditForm>
       )}
+
+      {/* FOOTER */}
       <Footer></Footer>
     </main>
   );
