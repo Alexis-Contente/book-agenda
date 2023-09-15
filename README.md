@@ -20,6 +20,7 @@ Cette application est un agenda qui permet d'enregistrer de nouveaux contacts et
 - Next.js
 - TypeScript
 - CSS
+- Tailwind CSS
 - Base de données MySQL
 
 ## 📦 Prérequis
