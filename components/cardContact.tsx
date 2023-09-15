@@ -1,10 +1,10 @@
 import Image from "next/image";
-import editIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-modifier-30.png";
-import deleteIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-close-cross-30.png";
-import userIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-person-24.png";
-import emailIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-email-24.png";
-import birthIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-birthday-24.png";
-import informationIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-information-25.png";
+import editIcon from "/public/data/icons8-modifier-30.png";
+import deleteIcon from "/public/data/icons8-close-cross-30.png";
+import userIcon from "/public/data/icons8-person-24.png";
+import emailIcon from "/public/data/icons8-email-24.png";
+import birthIcon from "/public/data/icons8-birthday-24.png";
+import informationIcon from "/public/data/icons8-information-25.png";
 
 type Contact = {
   id: number;
