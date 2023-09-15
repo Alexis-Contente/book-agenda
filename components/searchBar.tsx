@@ -1,5 +1,5 @@
 import Image from "next/image";
-import addIcon from "/home/alexis/Dev/book-agenda/public/data/icons8-add-30.png";
+import addIcon from "/public/data/icons8-add-30.png";
 
 type Props = {
   openModal: () => void;
