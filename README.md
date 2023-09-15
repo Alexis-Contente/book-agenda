@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BOOK AGENDA
 
-## Getting Started
+## Hi legends 👋
 
-First, run the development server:
+## 🪧 A propos
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Cette application est un agenda qui permet d'enregistrer de nouveaux contacts et de les consulter par la suite, ainsi que les modifier ou supprimer.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📔 Table des matières
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 🪧 À propos
+- 🏗️ Technologies Utilisées
+- 📦 Prérequis
+- 🚀 Installation
+- 🛠️ Utilisation
+- 🗄 Structure de la base de données
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🏗️ Technologies Utilisées
 
-## Learn More
+- Next.js
+- TypeScript
+- CSS
+- Base de données MySQL
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Prérequis
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js installé sur votre machine
+- npm (ou yarn) installé sur votre machine
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🚀 Installation
 
-## Deploy on Vercel
+1. Clonez ce dépôt sur votre machine locale.
+2. Naviguez vers le répertoire du projet via la ligne de commande.
+3. Exécutez `npm install` pour installer les dépendances.
+4. Exécutez `npm run dev` pour lancer l'application en mode développement.
+5. Ouvrez votre navigateur et accédez à [http://localhost:3000](http://localhost:3000).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Utilisation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. **Afficher sa liste de contacts** : Accédez à la page d'accueil pour voir la liste des contacts.
+2. **Ajouter un contact en renseignant ses informations** : Cliquez sur le bouton "Add" pour afficher le modal d'ajout.
+3. **Modifier les informations d'un contact** : Cliquez sur le bouton "Edit" d'une card pour afficher le modal de modification.
+4. **Supprimer un contact** : Cliquez sur le bouton "Delete" pour supprimer un contact de sa liste.
+5. **Rechercher un contact via la barre de recherche** : Commencez à écrire un nom, prenom ou adresse email dans la barre de recherche pour voir apparaître les résultats.
+
+## 🗄 Structure de la base de données
+
+### Table : `Contact`
+
+Cette table stocke les loops de la catégorie Musics.
+
+| Champ        | Type         | Description                                               |
+| ------------ | ------------ | --------------------------------------------------------- |
+| ID           | INT          | Identifiant unique d'un contact.                          |
+| lastname     | VARCHAR(255) | Nom du contact.                                           |
+| firstname    | VARCHAR(255) | Prénom du contact.                                        |
+| email        | VARCHAR(255) | Email du contact.                                         |
+| informations | VARCHAR(255) | Informations supplémentaires du contact, non obligatoire. |
+| birth        | VARCHAR(255) | Date de naissance du contact.                             |
