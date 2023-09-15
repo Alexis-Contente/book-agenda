@@ -16,9 +16,22 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+
+    if(!request.body) {
+
+      return NextResponse.json({
+        status: 400,
+        body: "Missing body",
+      });
+    }
+
+    const body =  request.body
+
+    
     const result = await prisma.contact.create({
-      data: request.body,
+      data: body,
     });
+
     return NextResponse.json(result);
   } catch (error) {
     console.log(error);
