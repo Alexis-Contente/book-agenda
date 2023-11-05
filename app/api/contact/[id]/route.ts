@@ -68,4 +68,4 @@ export async function PUT(request: NextRequest, { params }: { params: { id: numb
   catch (error) {
     console.error("Erreur lors de la création de l'objet contact",error);
     return NextResponse.error();
-  }}  
+  }}
